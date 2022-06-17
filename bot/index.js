@@ -1,6 +1,12 @@
 const express = require('express')
 const app = express()
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+app.use(bodyParser.json())
+
 const line = require('@line/bot-sdk')
 const lineConfig = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
