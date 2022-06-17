@@ -8,7 +8,11 @@ const lineConfig = {
 }
 const lineClient = new line.Client(lineConfig)
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+    await lineClient.broadcast({
+        type: 'text',
+        text: 'Hello, World.',
+    })
     res.send('Hello, World.')
 })
 
