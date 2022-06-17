@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 
-const cors = requrie('cors')
+const cors = require('cors')
 app.use(cors())
 
 const line = require('@line/bot-sdk')
