@@ -29,10 +29,14 @@ export default {
       return
     }
     this.message = "LIFF Init OK!"
+
+    if (!liff.isLoggedIn()) {
+      liff.login()
+    }
     
     try {
       const profile = await liff.getProfile()
-      this.mesage = profile.displayName
+      this.message = profile.displayName
     } catch {
       this.message = "LIFF GetProfile Error..."
     }
