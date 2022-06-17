@@ -28,7 +28,13 @@ export default {
       this.message = "LIFF Init Error..."
       return
     }
-    this.message = "LIFF Init Success!"
+    let profile = null
+    try {
+      profile = await liff.getProfile()
+      this.mesage = profile
+    } catch {
+      this.message = "LIFF GetProfile Error..."
+    }
   },
 }
 </script>
