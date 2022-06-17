@@ -1,18 +1,35 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld :msg="message" />
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import liff from '@line/liff'
 
 export default {
   name: 'App',
   components: {
     HelloWorld
-  }
+  },
+  data: function () {
+    return {
+      message: 'Hello, World',
+    }
+  },
+  mounted: async function () {
+    try {
+      await liff.init({
+        liffId: process.env.VUE_APP_LIFF_ID,
+      })
+    } catch  {
+      this.message = "LIFF Init Error..."
+      return
+    }
+    this.message = "LIFF Init Success!"
+  },
 }
 </script>
 
