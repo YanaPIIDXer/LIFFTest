@@ -18,7 +18,15 @@ app.get('/', async (req, res) => {
     res.send('Hello, World.')
 })
 
-app.post('/message', (req, res) => {
+app.post('/message', async (req, res) => {
+    const userId = req.body.userId
+    const message = req.body.message
+
+    await lineClient.pushMessage(userId, {
+        type: 'text',
+        text: message,
+    })
+    
     res.json({ result: true })
 })
 
