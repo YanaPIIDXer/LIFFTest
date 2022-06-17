@@ -9,11 +9,11 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig)
 
 app.get('/', async (req, res) => {
-    await lineClient.broadcast({
-        type: 'text',
-        text: 'Hello, World.',
-    })
     res.send('Hello, World.')
+})
+
+app.post('/message', (req, res) => {
+    res.json({ result: true })
 })
 
 const lineCallback = (e) => {
