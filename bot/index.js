@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 const lineCallback = (e) => {
-    return lineClient.replyMessage(e.replyToken, {
+    return lineClient.broadcast({
         type: 'text',
         text: 'Fuck.',
     })
