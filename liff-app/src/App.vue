@@ -7,7 +7,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-//import liff from '@line/liff'
+import liff from '@line/liff'
 
 export default {
   name: 'App',
@@ -20,7 +20,6 @@ export default {
     }
   },
   mounted: async function () {
-    /*
     try {
       await liff.init({
         liffId: process.env.VUE_APP_LIFF_ID,
@@ -37,7 +36,6 @@ export default {
     } catch {
       this.message = "LIFF GetProfile Error..."
     }
-    */
   },
 }
 </script>
