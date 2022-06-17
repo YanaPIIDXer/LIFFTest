@@ -47,7 +47,7 @@ export default {
     /**
      * メッセージ送信
      */
-    sendMessage: function () {
+    sendMessage: async function () {
       if (!liff.isLoggedIn()) {
         alert('ログインしてください')
         return
