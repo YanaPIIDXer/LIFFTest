@@ -21,9 +21,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
 
 .firebase/
 firebase-debug.log
-=======
->>>>>>> parent of 46f2eb1 (Firebaseの設定)
+.env
