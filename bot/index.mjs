@@ -58,16 +58,17 @@ app.get('/users', async (req, res) => {
 
     const users = []
     if (statusCode === 200) {
-        Promise.all(tokens.map(async token => {
+        Promise.all(tokens.map(token => {
             return Promise(resolve => {
-                const result = await verifyToken(token)
-                if (result) {
-                    users.push({
-                        userId: result.id,
-                        displayName: result.name,
-                    })
-                }
-                resolve()    
+                verifyToken(token).then(result => {
+                    if (result) {
+                        users.push({
+                            userId: result.id,
+                            displayName: result.name,
+                        })
+                    }
+                    resolve()    
+                })
             })
         }))
     }
