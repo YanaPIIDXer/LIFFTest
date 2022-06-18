@@ -44,7 +44,7 @@ app.get('/users', async (req, res) => {
     try {
         await client.connect()
 
-        const results = await postgresClient.query('SELECT * FROM users')
+        const results = await client.query('SELECT * FROM users')
         results.rows.forEach(row => {
             users.push({
                 userId: row['user_id'],
@@ -70,9 +70,9 @@ app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
         try {
             await client.connect()
             // ユーザ登録がされていなければ新規登録
-            const results = await postgresClient.query('SELECT * FROM users where user_id = $1', [userId])
+            const results = await client.query('SELECT * FROM users where user_id = $1', [userId])
             if (!results.rows.length) {
-                await postgresClient.query('INSERT INTO users VALUES($1, $2)', [userId, name])
+                await client.query('INSERT INTO users VALUES($1, $2)', [userId, name])
             }
         } catch (error) {
             console.error(error)
