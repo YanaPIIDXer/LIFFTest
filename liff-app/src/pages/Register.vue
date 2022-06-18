@@ -23,6 +23,7 @@ export default {
       let token = null
       try {
         token = liff.getIDToken()
+        if (!token) { throw token }
       } catch {
         alert('トークン取得エラー')
         return
