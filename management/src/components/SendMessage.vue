@@ -2,7 +2,7 @@
   <div class="send-message">
     <form @submit="onSubmit">
       <textarea v-model="message"></textarea><br />
-      <input type="submit" value="送信" />
+      <input type="submit" value="送信" :disabled="!targetId || !message" />
     </form>
   </div>
 </template>
@@ -26,8 +26,7 @@ export default {
   methods: {
     onSubmit: async function (e) {
       e.preventDefault()
-      if (!this.message) { return }
-
+      
       try {
         const response = await axios.post('https://yanap-liff-app-bot.herokuapp.com/message', {
           userId: this.targetId,
