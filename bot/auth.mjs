@@ -19,6 +19,7 @@ export default async (token) => {
         console.error(error)
         return null
     }
+    console.log(response)
     return {
         id: response.data.sub,
         name: response.data.name,

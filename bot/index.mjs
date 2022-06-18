@@ -61,7 +61,6 @@ app.get('/users', async (req, res) => {
         tokens.forEach(async token => {
             const result = await verifyToken(token)
             if (!result) { return }
-            console.log(result)
             users.push({
                 userId: result.id,
                 displayName: result.name,
