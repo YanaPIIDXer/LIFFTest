@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'UserList',
   data: function () {
@@ -17,7 +19,18 @@ export default {
     }
   },
   mounted: async function () {
-
+    try {
+      const response = await axios.get('https://yanap-liff-app-bot.herokuapp.com/users', {
+        headers: {
+          authorization: `Bearer ${process.env.VUE_APP_ADMIN_USER_ID}`
+        }
+      })
+      if (!response) { throw response }
+      
+      this.list = this.list.concat(response.data)
+    } catch {
+      alert('ユーザリストの取得失敗')
+    }
   },
 }
 </script>
