@@ -13,7 +13,11 @@ export default {
   name: 'App',
   components: {
     SendMessage,
-  }
+  },
+  data: function () {
+    return {
+    }
+  },
 }
 </script>
 
