@@ -25,8 +25,7 @@ export default {
           authorization: `Bearer ${process.env.VUE_APP_ADMIN_USER_ID}`
         }
       })
-      if (!response) { throw response }
-      
+      if (!response || response.status !== 200) { throw response }
       this.list = this.list.concat(response.data)
     } catch {
       alert('ユーザリストの取得失敗')
