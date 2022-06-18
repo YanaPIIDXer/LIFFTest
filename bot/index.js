@@ -17,7 +17,9 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/users', async (req, res) => {
-    if (!req.headers.authorization || req.headers.authorization.split(' ')[0] !== 'Bearer') {
+    if (!req.headers.authorization ||
+        req.headers.authorization.split(' ')[0] !== 'Bearer' ||
+        req.header.authorization.split(' ')[1] !== process.env.ADMIN_USER_ID) {
         res.status(403).send()
         return
     }
