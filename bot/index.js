@@ -29,10 +29,7 @@ app.post('/message', bodyParser.json(), async (req, res) => {
 })
 
 const lineCallback = (e) => {
-    return lineClient.replyMessage(e.replyToken, {
-        type: 'text',
-        text: 'Fuck.',
-    })
+    return lineClient.replyMessage(e.replyToken, e.message)
 }
 app.post('/callback', line.middleware(lineConfig), (req, res) => {
     Promise.all(req.body.events.map(lineCallback))
