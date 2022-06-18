@@ -26,7 +26,7 @@ export default {
         }
       })
       if (!response || response.status !== 200) { throw response }
-      this.list = this.list.concat(response.data)
+      this.list = this.list.concat(response.data.users)
     } catch {
       alert('ユーザリストの取得失敗')
     }
