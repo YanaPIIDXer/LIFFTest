@@ -26,7 +26,7 @@ app.get('/users', async (req, res) => {
 
     const users = []
     const idList = await lineClient.getBotFollowersIds()
-    idList.forEach(id => {
+    idList.forEach(async id => {
         const info = await lineClient.getProfile(id)
         users.push({
             userId: info.userId,
