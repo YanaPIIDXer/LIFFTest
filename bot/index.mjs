@@ -1,13 +1,13 @@
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser');
-
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
 import postgresClient from './PostgresClient.mjs'
+import line from '@line/bot-sdk'
 
-const cors = require('cors')
+const app = express()
+
 app.use(cors())
 
-const line = require('@line/bot-sdk')
 const lineConfig = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.CHANNEL_SECRET,
