@@ -40,6 +40,7 @@ app.get('/users', async (req, res) => {
 
     const users = []
     let statusCode = 200
+    /*
     const client = postgresClient()
     try {
         await client.connect()
@@ -57,9 +58,11 @@ app.get('/users', async (req, res) => {
     }
 
     await client.end()
+    */
     res.status(statusCode).json({ users: users })
 })
 
+/*
 app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
     await Promise.all(req.body.events.map(async (e) => {
         const profile = await lineClient.getProfile(e.source.userId)
@@ -82,6 +85,7 @@ app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
     }))
     res.status(200).send()
 })
+*/
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
