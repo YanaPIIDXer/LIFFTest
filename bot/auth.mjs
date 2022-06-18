@@ -7,12 +7,14 @@ export default async (token) => {
     params.append('id_token', token)
     params.append('client_id', process.env.CLIENT_ID)
 
-    const response = await axios.post(verifyUrl, params, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        }
-    })
-    if (!response || response.status !== 200) { return null }
+    try {
+        const response = await axios.post(verifyUrl, params, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        })
+        if (!response || response.status !== 200) { return null }    
+    } catch { return null }
     return {
         id: response.data.sub,
         name: response.data.name,
