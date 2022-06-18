@@ -1,12 +1,18 @@
 <template>
   <div id="app">
+    <SendMessage
+      target-id=""
+    />
   </div>
 </template>
 
 <script>
+import SendMessage from '@/components/SendMessage'
+
 export default {
   name: 'App',
   components: {
+    SendMessage,
   }
 }
 </script>
