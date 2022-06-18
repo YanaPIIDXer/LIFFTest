@@ -62,6 +62,10 @@ app.get('/users', async (req, res) => {
     res.status(statusCode).json({ users: users })
 })
 
+app.post('/register', bodyParser.json(), async (req, res) => {
+    res.json({ result: true })
+})
+
 /*
 app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
     await Promise.all(req.body.events.map(async (e) => {
