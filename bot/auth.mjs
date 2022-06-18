@@ -7,8 +7,9 @@ export default async (token) => {
     params.append('id_token', token)
     params.append('client_id', process.env.LIFF_CLIENT_ID)
 
+    let response = null
     try {
-        const response = await axios.post(verifyUrl, params, {
+        response = await axios.post(verifyUrl, params, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
