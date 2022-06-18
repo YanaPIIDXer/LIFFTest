@@ -46,7 +46,7 @@ export default {
         const response = await axios.post('https://yanap-liff-app-bot.herokuapp.com/register', {
           token: token,
         })
-        if (!response || response.status !== 200) { throw response }
+        if (!response || response.status !== 200 || !response.data.result) { throw response }
       } catch {
         alert('登録エラー')
         return
