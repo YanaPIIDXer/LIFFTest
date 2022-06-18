@@ -39,6 +39,7 @@ app.get('/users', async (req, res) => {
     }
 
     const users = []
+    let statusCode = 200
     try {
         await postgresClient.connect()
 
@@ -51,11 +52,11 @@ app.get('/users', async (req, res) => {
         })
     } catch (error) {
         console.error(error)
-        res.status(503).json({ users: [] })
-        return
+        statusCode = 503
     }
 
-    res.json({ users: users })
+    await postgresClient.end()
+    res.status(statusCode).json({ users: users })
 })
 
 app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
@@ -74,6 +75,7 @@ app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
         } catch (error) {
             console.error(error)
         }
+        await postgresClient.end()
         return Promise.resolve()
     }))
     res.status(200).send()
