@@ -30,6 +30,34 @@ app.post('/message', bodyParser.json(), async (req, res) => {
     res.json({ result: true })
 })
 
+app.get('/users', async (req, res) => {
+    if (!req.headers.authorization ||
+        req.headers.authorization.split(' ')[0] !== 'Bearer' ||
+        req.headers.authorization.split(' ')[1] !== process.env.ADMIN_USER_ID) {
+        res.status(403).send()
+        return
+    }
+
+    const users = []
+    try {
+        await postgresClient.connect()
+
+        const results = await postgresClient.query('SELECT * FROM users')
+        results.rows.forEach(row => {
+            users.push({
+                userId: row['user_id'],
+                displayName: row['name'],
+            })
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(503).json({ users: [] })
+        return
+    }
+
+    res.json({ users: users })
+})
+
 app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
     await Promise.all(req.body.events.map(async (e) => {
         const profile = await lineClient.getProfile(e.source.userId)
