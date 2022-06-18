@@ -14,7 +14,10 @@ export default async (token) => {
             }
         })
         if (!response || response.status !== 200) { return null }    
-    } catch { return null }
+    } catch (error) {
+        console.error(error)
+        return null
+    }
     return {
         id: response.data.sub,
         name: response.data.name,
