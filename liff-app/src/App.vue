@@ -4,7 +4,7 @@
 </template>
 
 <script>
-//import liff from '@line/liff'
+import liff from '@line/liff'
 
 export default {
   name: 'App',
@@ -14,7 +14,19 @@ export default {
     return {
     }
   },
-  methods: {
+  mounted: async function () {
+    try {
+      await liff.init({
+        liffId: process.env.VUE_APP_LIFF_ID,
+      })
+    } catch {
+      alert("LIFF初期化エラー")
+      return
+    }
+
+    if (!liff.isLoggedIn()) {
+      liff.login()
+    }
   }
 }
 </script>
