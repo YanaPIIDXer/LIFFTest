@@ -13,7 +13,7 @@ export default async (token) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         })
-        if (!response || response.status !== 200) { return null }    
+        if (!response || response.status !== 200) { throw response }    
     } catch (error) {
         console.error(error)
         return null
