@@ -101,31 +101,6 @@ app.post('/register', bodyParser.json(), async (req, res) => {
     res.status(statusCode).json({ result: result })
 })
 
-/*
-app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
-    await Promise.all(req.body.events.map(async (e) => {
-        const profile = await lineClient.getProfile(e.source.userId)
-        const userId = profile.userId
-        const name = profile.displayName
-
-        const client = postgresClient()
-        try {
-            await client.connect()
-            // ユーザ登録がされていなければ新規登録
-            const results = await client.query('SELECT * FROM users where user_id = $1', [userId])
-            if (!results.rows.length) {
-                await client.query('INSERT INTO users VALUES($1, $2)', [userId, name])
-            }
-        } catch (error) {
-            console.error(error)
-        }
-        await client.end()
-        return Promise.resolve()
-    }))
-    res.status(200).send()
-})
-*/
-
 const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`Run PORT:${port}`)
