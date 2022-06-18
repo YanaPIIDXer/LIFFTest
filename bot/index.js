@@ -16,27 +16,6 @@ app.get('/', async (req, res) => {
     res.send('Hello, World.')
 })
 
-app.get('/users', async (req, res) => {
-    if (!req.headers.authorization ||
-        req.headers.authorization.split(' ')[0] !== 'Bearer' ||
-        req.headers.authorization.split(' ')[1] !== process.env.ADMIN_USER_ID) {
-        res.status(403).send()
-        return
-    }
-
-    const users = []
-    const idList = await lineClient.getBotFollowersIds()
-    idList.forEach(async id => {
-        const info = await lineClient.getProfile(id)
-        users.push({
-            userId: info.userId,
-            displayName: info.displayName,
-        })
-    })
-
-    res.json({ users: users })
-})
-
 app.post('/message', bodyParser.json(), async (req, res) => {
     const userId = req.body.userId
     const message = req.body.message
