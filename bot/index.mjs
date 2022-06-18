@@ -46,8 +46,8 @@ app.get('/users', async (req, res) => {
         const results = await postgresClient.query('SELECT * FROM users')
         results.rows.forEach(row => {
             users.push({
-                userId: row.user_id,
-                displayName: row.name,
+                userId: row['user_id'],
+                displayName: row['name'],
             })
         })
     } catch (error) {
