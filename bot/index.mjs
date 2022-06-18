@@ -40,8 +40,9 @@ app.get('/users', async (req, res) => {
 
     const users = []
     let statusCode = 200
+    const client = postgresClient()
     try {
-        await postgresClient.connect()
+        await client.connect()
 
         const results = await postgresClient.query('SELECT * FROM users')
         results.rows.forEach(row => {
@@ -55,7 +56,7 @@ app.get('/users', async (req, res) => {
         statusCode = 503
     }
 
-    await postgresClient.end()
+    await client.end()
     res.status(statusCode).json({ users: users })
 })
 
@@ -65,8 +66,9 @@ app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
         const userId = profile.userId
         const name = profile.displayName
 
+        const client = postgresClient()
         try {
-            await postgresClient.connect()
+            await client.connect()
             // ユーザ登録がされていなければ新規登録
             const results = await postgresClient.query('SELECT * FROM users where user_id = $1', [userId])
             if (!results.rows.length) {
@@ -75,7 +77,7 @@ app.post('/line_webhook', line.middleware(lineConfig), async (req, res) => {
         } catch (error) {
             console.error(error)
         }
-        await postgresClient.end()
+        await client.end()
         return Promise.resolve()
     }))
     res.status(200).send()
