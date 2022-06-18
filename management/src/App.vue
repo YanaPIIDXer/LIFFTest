@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <UserList />
+    <UserList @input="onChangeUser" />
     <SendMessage
-      :target-id="adminId"
+      :target-id="targetId"
     />
   </div>
 </template>
@@ -19,9 +19,17 @@ export default {
   },
   data: function () {
     return {
-      adminId: process.env.VUE_APP_ADMIN_USER_ID,
+      targetId: "",
     }
   },
+  methods: {
+    /**
+     * ユーザが切り替わった
+     */
+    onChangeUser: function (userId) {
+      this.targetId = userId
+    }
+  }
 }
 </script>
 

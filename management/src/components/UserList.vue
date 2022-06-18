@@ -1,7 +1,7 @@
 <template>
   <div class="user-list">
-    <select>
-      <option v-for="item in list" :key="item.userId">
+    <select @change="$emit('input', $event.target.value)">
+      <option v-for="item in list" :key="item.userId" :value="item.userId">
         {{ item.displayName }}
       </option>
     </select>
