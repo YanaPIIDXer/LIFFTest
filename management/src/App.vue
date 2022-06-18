@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <SendMessage
-      target-id=""
+      :target-id="adminId"
     />
   </div>
 </template>
@@ -16,6 +16,7 @@ export default {
   },
   data: function () {
     return {
+      adminId: process.env.VUE_APP_ADMIN_USER_ID,
     }
   },
 }

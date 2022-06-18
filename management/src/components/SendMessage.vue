@@ -1,8 +1,10 @@
 <template>
-  <form @submit="onSubmit">
-    <textarea v-model="message"></textarea><br />
-    <input type="submit" value="送信" />
-  </form>
+  <div class="send-message">
+    <form @submit="onSubmit">
+      <textarea v-model="message"></textarea><br />
+      <input type="submit" value="送信" />
+    </form>
+  </div>
 </template>
 
 <script>
@@ -10,7 +12,7 @@ import axios from 'axios'
 
 export default {
   name: 'SendMessage',
-  params: {
+  props: {
     targetId: {
       type: String,
       require: true,
