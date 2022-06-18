@@ -3,12 +3,11 @@ import axios from 'axios'
 const verifyUrl = 'https://api.line.me/oauth2/v2.1/verify'
 
 export default async (token) => {
-    const params = new URLSearchParams()
-    params.append('id_token', token)
-    params.append('client_id', process.env.CLIENT_ID)
-
     try {
-        const response = await axios.post(verifyUrl, params, {
+        const response = await axios.post(verifyUrl, {
+            id_token: token,
+            client_id: process.env.CLIENT_ID,
+        }, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
