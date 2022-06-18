@@ -90,7 +90,7 @@ app.post('/register', bodyParser.json(), async (req, res) => {
         // ユーザ登録がされていなければ新規登録
         const results = await client.query('SELECT token from users where token = $1', [token])
         if (!results.rows.length) {
-            await client.query('INSERT INTO users VALUES($1)', [token])
+            await client.query('INSERT INTO users(token) VALUES($1)', [token])
             result = true
         }
     } catch (error) {
