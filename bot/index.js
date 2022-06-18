@@ -29,7 +29,7 @@ app.post('/message', bodyParser.json(), async (req, res) => {
 })
 
 const lineCallback = (e) => {
-    return lineClient.broadcast({
+    return lineClient.replyMessage(e.replyToken, {
         type: 'text',
         text: 'Fuck.',
     })
