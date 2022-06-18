@@ -60,6 +60,7 @@ app.get('/users', async (req, res) => {
     if (statusCode === 200) {
         tokens.forEach(async token => {
             const result = await verifyToken(token)
+            console.log(token, result)
             if (!result) { return }
             users.push({
                 userId: result.id,
