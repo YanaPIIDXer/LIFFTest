@@ -4,7 +4,7 @@
   "description": "LIFF APP BOT",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.mjs"
   },
   "author": "",
   "license": "MIT",
