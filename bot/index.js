@@ -28,18 +28,6 @@ app.post('/message', bodyParser.json(), async (req, res) => {
     res.json({ result: true })
 })
 
-const lineCallback = (e) => {
-    return lineClient.replyMessage(e.replyToken, e.message)
-}
-app.post('/callback', line.middleware(lineConfig), (req, res) => {
-    Promise.all(req.body.events.map(lineCallback))
-        .then(r => res.json(r))
-        .catch(err => {
-            console.error(err)
-            res.status(500).end()
-        })
-})
-
 const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`Run PORT:${port}`)
