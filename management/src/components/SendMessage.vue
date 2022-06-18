@@ -26,18 +26,18 @@ export default {
   methods: {
     onSubmit: async function (e) {
       e.preventDefault()
-      
+
+      const message = this.message
+      this.message = ""
       try {
         const response = await axios.post('https://yanap-liff-app-bot.herokuapp.com/message', {
           userId: this.targetId,
-          message: this.message,
+          message: message,
         })
         if (!response || !response.data.result) { throw response }
       } catch {
         alert('送信失敗')
-      }
-      
-      this.message = ""
+      }      
     }
   },
 }
