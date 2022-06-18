@@ -39,27 +39,35 @@ app.get('/users', async (req, res) => {
         return
     }
 
-    const users = []
     let statusCode = 200
-    /*
+
+    const tokens = []
     const client = postgresClient()
     try {
         await client.connect()
 
-        const results = await client.query('SELECT * FROM users')
+        const results = await client.query('SELECT token FROM users')
         results.rows.forEach(row => {
-            users.push({
-                userId: row['user_id'],
-                displayName: row['name'],
-            })
+            tokens.push(row['token'])
         })
     } catch (error) {
         console.error(error)
         statusCode = 503
     }
-
     await client.end()
-    */
+
+    const users = []
+    if (statusCode === 200) {
+        tokens.forEach(async token => {
+            const result = await verifyToken(token)
+            if (!result) { return }
+            users.push({
+                userId: result.id,
+                displayName: result.name,
+            })
+        })
+    }
+    
     res.status(statusCode).json({ users: users })
 })
 
@@ -82,7 +90,7 @@ app.post('/register', bodyParser.json(), async (req, res) => {
         // ユーザ登録がされていなければ新規登録
         const results = await client.query('SELECT token from users where token = $1', [token])
         if (!results.rows.length) {
-            await client.query('INSERT INTO users VALUES($1)', token)
+            await client.query('INSERT INTO users VALUES($1)', [token])
             result = true
         }
     } catch (error) {
