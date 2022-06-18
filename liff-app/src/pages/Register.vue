@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <button @click="onRegister">ユーザ登録</button>
+    <button @click="onRegister" :disabled="isProcessing">ユーザ登録</button>
   </div>
 </template>
 
@@ -10,11 +10,24 @@ import axios from 'axios'
 
 export default {
   name: 'Register',
+  data: function () {
+    return {
+      isProcessing: false,
+    }
+  },
   methods: {
     /**
      * 登録ボタン押下
      */
     onRegister: async function () {
+      this.isProcessing = true
+      await this.processRegister()
+      this.isProcessing = false
+    },
+    /**
+     * 登録処理
+     */
+    processRegister: async function () {
       if (!liff.isLoggedIn()) {
         alert('ログインしていません')
         return
@@ -39,7 +52,7 @@ export default {
         return
       }
       alert('登録しました')
-    }
+    },
   }
 }
 </script>
