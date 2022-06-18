@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
 
-const postgresClient = require('./PostgresClient')
+import postgresClient from './PostgresClient.js'
 
 const cors = require('cors')
 app.use(cors())
