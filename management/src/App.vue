@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <UserList />
     <SendMessage
       :target-id="adminId"
     />
@@ -7,11 +8,13 @@
 </template>
 
 <script>
+import UserList from '@/components/UserList'
 import SendMessage from '@/components/SendMessage'
 
 export default {
   name: 'App',
   components: {
+    UserList,
     SendMessage,
   },
   data: function () {
